@@ -13,7 +13,7 @@ body {
     color: #264653;
   }
 
-
+/* container styling*/
 .quiz-container {
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@ body {
     border-radius: 1rem;
     box-shadow: 0 1rem 1rem -0.7rem rgba(0,0,0,0.1);
 }
-
+/* questions and timer styling*/
 .question{
     font-size: 30px;
     font-weight: 600;
@@ -46,7 +46,7 @@ ul li {
     font-size: 1.5rem;
     margin: 16px;
 }
-
+/* button styiling*/
 .btn {
     padding: 1rem 3rem;
     display: block;

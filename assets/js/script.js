@@ -48,21 +48,33 @@ const QuizData = [
 
 
 const startTest = document.querySelector('#startTest');
+// Constants declared for DOM elements and possible choices
 
 
-startTest.addEventListener('click', () => {
-    document.querySelector('.startPage').style.display = 'none';
-});
+const quiz = document.querySelector('.quiz');
+const question = document.querySelector('.question');
 
-// Add timer for all the questions
+const option1 = document.querySelector('.option1');
+const option2 = document.querySelector('.option2');
+const option3 = document.querySelector('.option3');
+const option4 = document.querySelector('.option4');
+
+const answers = document.querySelectorAll('.answer');
+const submit = document.querySelector('#submit');
 
 const timer = document.getElementById("timer");
 let timerInterval;
+let questionCount = 0;
+let score = 0;
 
-startTimer = () => {
+// Add timer for all the questions
+
+
+const startTimer = () => {
+	console.log('running');
     clearInterval(timerInterval);
-    let second = 30,
-        minute = 1;
+    let second = 1,
+        minute = 30;
 
     timerInterval = setInterval(function () {
         timer.classList.toggle("odd");
@@ -74,6 +86,9 @@ startTimer = () => {
             if (minute === 0) {
                 clearInterval(timerInterval);
                 alert("Time is up!");
+                // end the quiz
+                endQuiz();
+                
             }
             minute--;
             second = 60;
@@ -83,25 +98,14 @@ startTimer = () => {
 };
 
 
-// Constants declared for DOM elements and possible choices
-
-
-const quiz = document.querySelector('.quiz');
-
-const question = document.querySelector('.question');
-
-const option1 = document.querySelector('.option1');
-const option2 = document.querySelector('.option2');
-const option3 = document.querySelector('.option3');
-const option4 = document.querySelector('.option4');
-
-const answers = document.querySelectorAll('.answer');
-const submit = document.querySelector('#submit');
-
-
-let questionCount = 0;
-let score = 0;
-
+const endQuiz = () => {
+     quiz.innerHTML = `
+        <h1> scored ${score} / ${QuizData.length} </h1>
+        <button class="btn" onclick="location.reload()"> Restart Quiz </button>
+        `;
+        clearInterval(timerInterval);
+    }
+    
 const loadQuestion = () => {
     question.innerHTML = QuizData[questionCount].question;
     option1.innerHTML = QuizData[questionCount].a;
@@ -110,9 +114,14 @@ const loadQuestion = () => {
     option4.innerHTML = QuizData[questionCount].d;
 };
 
-loadQuestion();
-
 // Add event listener to answer and score
+
+startTest.addEventListener('click', () => {
+    document.querySelector('.startPage').style.display = 'none';
+    loadQuestion();
+    startTest();
+});
+
 
 submit.addEventListener('click', () => {
 
@@ -145,11 +154,7 @@ submit.addEventListener('click', () => {
     if (questionCount < QuizData.length) {
         loadQuestion();
     } else {
-        quiz.innerHTML = `
-        <h1> scored ${score} / ${QuizData.length} </h1>
-        <button class="btn" onclick="location.reload()"> Restart Quiz </button>
-        `;
-        clearInterval(timerInterval);
+        endQuiz;
     }
 
 });

@@ -134,6 +134,7 @@ submit.addEventListener('click', () => {
         });
         return answer;
     };
+    
     if (CheckAnswer() === QuizData[questionCount].ans) {
         score++;
     }
@@ -154,7 +155,7 @@ submit.addEventListener('click', () => {
     if (questionCount < QuizData.length) {
         loadQuestion();
     } else {
-        endQuiz;
+        endQuiz();
     }
 
 });

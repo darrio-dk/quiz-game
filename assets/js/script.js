@@ -73,8 +73,8 @@ let score = 0;
 const startTimer = () => {
 	console.log('running');
     clearInterval(timerInterval);
-    let second = 1,
-        minute = 30;
+    let second = 10,
+        minute = 0;
 
     timerInterval = setInterval(function () {
         timer.classList.toggle("odd");
